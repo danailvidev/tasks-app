@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SpinnerComponent } from '../ui/spinner/spinner.component';
-
+//import { SpinnerComponent } from '../common/spinner/spinner.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule
   ],
   declarations: [
-    SpinnerComponent
+    FooterComponent
   ],
   exports: [
-    SpinnerComponent
+    FooterComponent
   ]
 })
 export class SharedModule { }

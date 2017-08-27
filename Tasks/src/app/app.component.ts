@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from './shared/auth.service';
-import { TasksService } from './shared/tasks.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  user = null;
-  tasks;
+ 
 
-  constructor(private auth: AuthService, private db: TasksService) {
+  constructor() {
     // this.tasks = db.list('tasks', {
     //   query: {
     //    orderByChild: "name",
@@ -34,18 +30,7 @@ export class AppComponent {
 
   }
 
-  ngOnInit() {
-    this.auth.getAuthState().subscribe(
-      (user) => this.user = user);
-      this.db.get().subscribe((res) => {
-        this.tasks = res;
-        console.log(this.tasks);
-      });
-  }
-
-  loginWithGoogle() {
-    this.auth.loginWithGoogle();
-  }
+  
 }
 
 

@@ -1,0 +1,54 @@
+
+<h2>Hello {{ currentUser.email}}</h2>
+<section>
+  <a md-raised-button routerLink=".">Raised button</a>
+  <a md-raised-button color="primary" routerLink=".">Raised button2</a>
+</section>
+
+<md-divider style="height:15px;"></md-divider>
+
+<section>
+  <!-- <form class="limits">
+    <md-select placeholder="Change Limits" [(ngModel)]="limits" name="limits" (onClose)="changeLimits()">
+      <md-option *ngFor="let limit of limits" [value]="limit.value" >
+        {{limit.viewValue}}
+      </md-option>
+    </md-select>
+  
+    <p> Selected Limit: {{limit}} </p>
+  </form> -->
+  <md-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPaginateChange($event)">
+  </md-paginator>
+
+</section>
+
+<section class="mat-typography">
+  <md-card *ngFor="let task of tasks">
+    <md-card-title><span>Name: </span>{{task.name}}</md-card-title>
+    <md-card-subtitle>
+      <md-icon>date_range</md-icon>{{task.date}}</md-card-subtitle>
+    <div class="task-info">
+      <button md-icon-button [mdMenuTriggerFor]="menu">
+          <md-icon>more_vert</md-icon>
+        </button>
+      <md-menu #menu="mdMenu">
+        <button md-menu-item disabled>
+    <md-icon>account-key</md-icon>
+    <span>Login</span>
+  </button>
+        <button md-menu-item>
+    <md-icon>settings</md-icon>
+    <span>Settings</span>
+  </button>
+        <button md-menu-item>
+    <md-icon>info</md-icon>
+    <span>Info</span>
+  </button>
+        <button md-menu-item disabled>
+    <md-icon>logout</md-icon>
+    <span>Logout</span>
+  </button>
+      </md-menu>
+    </div>
+  </md-card>
+</section>

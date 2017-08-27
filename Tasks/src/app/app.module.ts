@@ -1,36 +1,52 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
+// Components
 import { AppComponent } from './app.component';
 
+// Settings
 import { environment } from '../environments/environment';
 
-import {MdMenuModule} from '@angular/material';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+// Modules
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { MaterialModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 // Shared/Widget
 import { SharedModule } from './shared/shared.module';
 
-import { AuthService } from './shared/auth.service';
-import { TasksService } from './shared/tasks.service';
+//Service
+import { AuthService } from './services/auth.service';
+import { TaskService } from './services/task.service';
+
+import { AppRoutingModule } from './app.routes-module';
+import { LoginComponent } from './login/login.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { RequirementsComponent } from './requirements/requirements.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    TaskListComponent,
+    RequirementsComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule, 
-    AngularFireAuthModule, 
-    MdMenuModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     NoopAnimationsModule,
-    SharedModule
+    SharedModule,
+    MaterialModule,
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [AuthService,TasksService],
+  providers: [AuthService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

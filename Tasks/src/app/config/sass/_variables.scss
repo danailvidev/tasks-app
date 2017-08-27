@@ -1,0 +1,35 @@
+$font-family: 'Open Sans', sans-serif;
+
+$resXXL: 1280px;
+$resXL: 1170px;
+$resL: 991px;
+$resM: 768px;
+$resS: 660px;
+$resXS: 500px;
+$resXXS: 435px;
+$resMin: 320px;
+
+$default-animation-duration: 0.2s;
+$default-animation-style: ease-out;
+
+$assets-root: '../../assets/';
+$images-root: $assets-root + 'images/';
+$fonts-root: $assets-root + 'fonts/';
+$imgUrl: '../../../assets/imgages/';
+$font-thin: 100;
+$font-light: 300;
+$font-normal: 400;
+$font-bold: 700;
+$font-bolder: 500;
+$font-ultraBold: 900;
+
+
+//default colors
+$primary-color: #7b1fa2;
+$accent-color: #69f0ae;       
+$secondary-color: #f0fff0;      
+$menu-background-color: #eee;   
+$text-primary-color: #888;     
+
+//navigation variables
+$nav-width: 200px;

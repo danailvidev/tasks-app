@@ -1,0 +1,63 @@
+<h1>Task for Senior Javascript Developer with Angular</h1>
+<p>You should develop a simple project management web app with the following functionalities and requirements. Full implementation
+  is not required, but will be considered a big advantage. You should follow JS and Angular’s best practices and use ES6
+  as much as possible. There are no limitations about the design other than that it should be comprehensible and user-friendly.
+  You may use CSS & JS frameworks and libraries including, but not limited to, Bootstrap, MaterializeCSS(recommended), MDL(recommended),SemanticUI,
+  AngularUI, jQuery(not recommended), underscore, RxJS, or any other tool such as npm, bower, Babel</p>
+
+<h2>Functionalities:</h2>
+<ul>
+  <li>The app should use angular’s routing with the following routes:
+    <ul>
+      <li>Dashboard - displays every task for every user grouped by user. Also if the user is logged in there should be an option
+        to show only the tasks for the current user</li>
+      <li>Tasks - displays a list of all tasks and which is the assigned user for the task</li>
+      <li>Single Task - displays all the info about a chosen task</li>
+      <li>Users - displays a list of all the users with the total number of tasks assigned to them.</li>
+      <li>Single User - displays all the info about a chosen user</li>
+    </ul>
+  </li>
+  <li>Defining the specific route names is up to you</li>
+  <li>The app should use Firebase as a database</li>
+  <li>Users should be able to register and login with username and password.</li>
+  <li>Users should be able to add and change simple info about themselves, like email, first & last name, department. Usernames
+    and password doesn’t need to be changeable.</li>
+  <li>Registered users should be able to create and delete tasks. Task creation doesn’t need to happen in a separate route. It
+    can happen in a modal/popup which shows after clicking a FAB button.
+  </li>
+  <li>Tasks should have the following properties: Title, Description, Assignee(dropdown with all users), Comments</li>
+  <li>Only registered users can delete a task or post comments.</li>
+  <li>Every registered user could change the task’s assignee(dropdown with all users).</li>
+  <li>Every name of task/user should be a link to the task/user’s page</li>
+  <li>All comments should be inside comment tag, which should strip out all HTML tags and leave only anchors with valid URLs</li>
+  <li>All comments should have Author, Comment and Posted On Datetime</li>
+  <li>Any unspecified conditions can be implemented as you wish</li>
+  <li>You may implement anything additional, that you think might be suitable </li>
+</ul>
+
+
+<h3> Requirements:</h3>
+
+<ul>
+  <li>Implement at least one of every type of directive</li>
+  <li>Implement at least one custom filter and use it</li>
+  <li>Using LESS/SASS</li>
+  <li>Using Gulp as a build tool</li>
+  <li>Implement at least once a custom watch</li>
+  <li>Use at least once angular’s events to share data/action between controllers</li>
+</ul>
+
+<h3>Optional:</h3>
+
+<ul>
+  <li>Using reactive programming (Rx.js)</li>
+  <li>Being able to visualize in a nice way a lot of data (20K tasks & 10K users)</li>
+  <li>Write documentation for your app explaining how it works and what’s the logic</li>
+  <li>As the users can only be added and not deleted. You might use localStorage to cache all the current users. So when the
+    client comes in next time, you can initialize the users list with all the users from the last time. And in case the users
+    request doesn’t succeed the client could still be able to see some data.</li>
+  <li>Implement a notification system (it’s not necessary to be real time) to show the user notifications about when he/she was
+    assigned to a task or there was a new comment in a task to which he/she is assigned</li>
+  <li>Add filtering and/or sorting on lists</li>
+  <li>Use promises in services where asynchronous actions are required</li>
+</ul>

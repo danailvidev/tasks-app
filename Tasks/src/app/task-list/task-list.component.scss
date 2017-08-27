@@ -1,0 +1,15 @@
+
+:host {
+
+    section {
+        padding: 15px;
+    }
+    md-card {
+        margin: 10px 0;
+        .task-info{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
