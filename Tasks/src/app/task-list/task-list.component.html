@@ -1,8 +1,8 @@
 <h2>Hello {{ currentUser.email}}</h2>
   
 <section>
-  <a md-raised-button routerLink=".">Raised button</a>
-  <a md-raised-button color="primary" routerLink=".">Raised button2</a>
+  <a md-raised-button routerLink=".">My Tasks</a>
+  <a md-raised-button color="primary" routerLink=".">Create New Task</a>
 </section>
 
 <md-divider style="height:15px;"></md-divider>
@@ -34,11 +34,7 @@
       <md-menu #menu="mdMenu">
         <button md-menu-item>
           <md-icon>info</md-icon>
-          <span>Detail</span>
-        </button>
-        <button md-menu-item>
-          <md-icon>settings</md-icon>
-          <span>Settings</span>
+          <span>Details</span>
         </button>
         <button md-menu-item (click)="btnDeleteClick(task.$key)">
           <md-icon>delete</md-icon>

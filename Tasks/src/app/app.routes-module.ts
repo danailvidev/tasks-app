@@ -7,11 +7,11 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { RequirementsComponent } from './requirements/requirements.component';
 
 const routes: Routes = [
-  { path: '', component: RequirementsComponent },
   { path: 'requirements', component: RequirementsComponent, },
   { path: 'login', component: LoginComponent, },
   { path: 'tasks', component: TaskListComponent, canActivate: [AuthGuard]},
-  //{ path: 'users', loadChildren: "./uploads/shared/upload.module#UploadModule" }
+  { path: '', component: RequirementsComponent },
+  { path: '**', component: RequirementsComponent }
 ];
 
 @NgModule({
@@ -20,3 +20,4 @@ const routes: Routes = [
   providers: [AuthGuard]
 })
 export class AppRoutingModule { }
+
