@@ -15,27 +15,30 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-
-// Shared/Widget
-import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app.routes-module';
+import { CdkTableModule } from '@angular/cdk';
 
 //Service
 import { AuthService } from './services/auth.service';
 import { TaskService } from './services/task.service';
 import { NotifyService } from './services/notify.service';
+import {  UserService } from './services/user.service';
 
-
-import { AppRoutingModule } from './app.routes-module';
-import { LoginComponent } from './login/login.component';
-import { TaskListComponent } from './task-list/task-list.component';
-import { RequirementsComponent } from './requirements/requirements.component';
+// Components
+import { LoginComponent } from './ui/login/login.component';
+import { TaskListComponent } from './ui/task-list/task-list.component';
+import { RequirementsComponent } from './ui/requirements/requirements.component';
+import { UsersComponent } from './ui/users/users.component';
+import { HeaderComponent } from './ui/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TaskListComponent,
-    RequirementsComponent
+    RequirementsComponent,
+    UsersComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -43,15 +46,17 @@ import { RequirementsComponent } from './requirements/requirements.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NoopAnimationsModule,
-    SharedModule,
     MaterialModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    CdkTableModule
   ],
   providers: [
     AuthService,
     TaskService,
-    NotifyService],
-  bootstrap: [AppComponent]
+    NotifyService,
+    UserService
+  ],
+  bootstrap: [AppComponent ]
 })
 export class AppModule { }

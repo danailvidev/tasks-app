@@ -67,17 +67,7 @@ export class AuthService {
     const provider = new firebase.auth.GoogleAuthProvider()
     return this.socialSignIn(provider);
   }
-
-  facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider()
-    return this.socialSignIn(provider);
-  }
-
-  twitterLogin(){
-    const provider = new firebase.auth.TwitterAuthProvider()
-    return this.socialSignIn(provider);
-  }
-
+ 
   private socialSignIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) =>  {
@@ -87,16 +77,6 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
-
-  //// Anonymous Auth ////
-
-  anonymousLogin() {
-    return this.afAuth.auth.signInAnonymously()
-    .then((user) => {
-      this.authState = user
-    })
-    .catch(error => console.log(error));
-  }
 
   //// Email/Password Auth ////
 
@@ -132,7 +112,8 @@ export class AuthService {
 
   signOut(): void {
     this.afAuth.auth.signOut();
-    this.router.navigate(['/'])
+    window.location.reload();
+    //this.router.navigate(['/'])
   }
 
 

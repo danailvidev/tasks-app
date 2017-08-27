@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { TaskService } from '../services/task.service';
-import { NotifyService } from '../services/notify.service';
+import { TaskService } from '../../services/task.service';
+import { NotifyService } from '../../services/notify.service';
 import { FirebaseListObservable } from 'angularfire2/database';
-import { Task } from '../view-models/task';
-import { RequirementsComponent } from '../requirements/requirements.component';
+import { Task } from '../../view-models/task';
 
 @Component({
   selector: 'app-task-list',
@@ -12,20 +10,20 @@ import { RequirementsComponent } from '../requirements/requirements.component';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  user = null;
   tasks: any;
   showSpinner: boolean = false;
   selectedValue: string;
   currentUser: any;
 
-  constructor(private auth: AuthService,
-    private taskSvc: TaskService,
-    public notify: NotifyService) {
+  constructor(private taskSvc: TaskService,
+              public notify: NotifyService) {
   }
 
   ngOnInit() {
-    this.currentUser = this.auth.currentUser;
-    this.getTask(this.pageSize);
+    this.taskSvc.getTask(null).subscribe((res) => {
+      this.length = res.length;
+      this.tasks = res;
+    });
   }
 
   // MdPaginator Inputs
@@ -46,7 +44,6 @@ export class TaskListComponent implements OnInit {
   getTask(pageSize) {
     this.taskSvc.getTask(this.pageSize).subscribe((res) => {
       this.tasks = res;
-      console.log(res);
     });
   }
 

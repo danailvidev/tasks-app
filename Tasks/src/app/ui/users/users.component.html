@@ -1,0 +1,10 @@
+<md-list-item *ngFor="let user of users | async">
+    <h2 md-line>Name: {{user.name}} / Email: {{user.email}}</h2>
+    <!-- <p md-line> 
+       <span mdTooltip="Score" mdTooltipPosition="above"><md-icon>thumb_up</md-icon> {{user.tasks}} </span>&nbsp;&nbsp;
+      <span mdTooltip="Number of comments" mdTooltipPosition="above"><md-icon>chat</md-icon> {{user.comments}}</span>&nbsp;&nbsp; 
+    </p> -->
+    <a mdTooltip="Detail View" mdTooltipPosition="above" md-raised-button (click)="view(user)">Edit</a>
+  </md-list-item>
+
+  

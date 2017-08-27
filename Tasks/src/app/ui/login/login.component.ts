@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  //@Output() user = new EventEmitter();
 
   constructor(public auth: AuthService,
     private router: Router) { }
@@ -27,29 +28,13 @@ export class LoginComponent implements OnInit {
       .then(() => this.afterSignIn());
   }
 
-  signInWithFacebook(): void {
-    this.auth.facebookLogin()
-      .then(() => this.afterSignIn());
-  }
-
-  signInWithTwitter(): void {
-    this.auth.twitterLogin()
-      .then(() => this.afterSignIn());
-  }
-
-  /// Anonymous Sign In
-
-  signInAnonymously() {
-    this.auth.anonymousLogin()
-      .then(() => this.afterSignIn());
-  }
-
-
   /// Shared
-
   private afterSignIn(): void {
     // Do after login stuff here, such router redirects, toast messages, etc.
-    this.router.navigate(['/']);
+    //this.user.emit(this.auth.currentUser);
+
+    this.router.navigate(['/tasks']);
+    window.location.reload();
   }
 
 }

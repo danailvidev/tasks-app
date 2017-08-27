@@ -1,0 +1,36 @@
+<md-toolbar color="primary">
+  <button md-icon-button>
+    <i class="material-icons">notifications_active</i>
+  </button>
+  <div class="app-toolbar">
+    <a class="docs-button mat-button" routerLink="/tasks" routerLinkActive="active-link" aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Tasks</span>
+        <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
+      </a>
+    <a *ngIf="!user" class="docs-button mat-button" routerLink="/login" aria-disabled="false" routerLinkActive="active-link"tabindex="0"><span class="mat-button-wrapper">Login</span>
+        <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
+      </a>
+      <a class="docs-button mat-button"  routerLink="/users" routerLinkActive="active-link" aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Users</span>
+        <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
+      </a>
+      <a class="docs-button mat-button" routerLink="/requirements" routerLinkActive="active-link"aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Requirements</span>
+        <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
+      </a>
+  </div>
+  <div flex class="user-info">
+    <button *ngIf="user" md-icon-button [mdMenuTriggerFor]="menu">
+        <img src="{{user?.photoURL}}" alt="">
+        <span>{{user?.email}}</span>
+        <i class="material-icons">keyboard_arrow_down</i>
+      </button>
+    <md-menu #menu="mdMenu">
+      <button md-menu-item>
+          <md-icon>info</md-icon>
+          <span>Edit</span>
+        </button>
+      <button md-menu-item (click)="logOut()">
+          <i class="material-icons">flight_takeoff</i>
+          <span>Logout</span>
+        </button>
+    </md-menu>
+  </div>
+</md-toolbar>
