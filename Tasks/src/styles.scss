@@ -1,1 +1,12 @@
 @import '~@angular/material/prebuilt-themes/purple-green.css';
+@import "./app/config/sass/config";
+
+snack-bar-container.snack-delete {
+    
+    .mat-simple-snackbar-action {
+        color: $warn-color!important;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+

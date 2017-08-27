@@ -1,15 +1,21 @@
-
+@import "../config/sass/config";
 :host {
-
     section {
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 15px;
     }
     md-card {
         margin: 10px 0;
+        border: 1px solid transparent;
         .task-info{
             position: absolute;
             top: 0;
             right: 0;
         }
+        &:hover {
+            border: 1px solid $accent-color;
+        }
     }
+    
 }

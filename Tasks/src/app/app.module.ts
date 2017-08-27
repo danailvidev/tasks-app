@@ -22,6 +22,8 @@ import { SharedModule } from './shared/shared.module';
 //Service
 import { AuthService } from './services/auth.service';
 import { TaskService } from './services/task.service';
+import { NotifyService } from './services/notify.service';
+
 
 import { AppRoutingModule } from './app.routes-module';
 import { LoginComponent } from './login/login.component';
@@ -46,7 +48,10 @@ import { RequirementsComponent } from './requirements/requirements.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [AuthService, TaskService],
+  providers: [
+    AuthService,
+    TaskService,
+    NotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
