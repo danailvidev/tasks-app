@@ -57,7 +57,6 @@ export class AuthService {
   }
 
   //// Social Auth ////
-
   githubLogin() {
     const provider = new firebase.auth.GithubAuthProvider()
     return this.socialSignIn(provider);
@@ -71,20 +70,21 @@ export class AuthService {
   private socialSignIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) =>  {
-          this.authState = credential.user
-          this.updateUserData()
+          this.authState = credential.user;
+          this.updateUserData();
+          window.location.reload();
       })
       .catch(error => console.log(error));
   }
 
 
   //// Email/Password Auth ////
-
   emailSignUp(email:string, password:string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user
-        this.updateUserData()
+        this.authState = user;
+        this.updateUserData();
+        window.location.reload();
       })
       .catch(error => console.log(error));
   }
@@ -92,24 +92,14 @@ export class AuthService {
   emailLogin(email:string, password:string) {
      return this.afAuth.auth.signInWithEmailAndPassword(email, password)
        .then((user) => {
-         this.authState = user
-         this.updateUserData()
+         this.authState = user;
+         this.updateUserData();
+         window.location.reload();
        })
        .catch(error => console.log(error));
   }
 
-  // Sends email allowing user to reset password
-  resetPassword(email: string) {
-    const fbAuth = firebase.auth();
-
-    return fbAuth.sendPasswordResetEmail(email)
-      .then(() => console.log("email sent"))
-      .catch((error) => console.log(error))
-  }
-
-
   //// Sign Out ////
-
   signOut(): void {
     this.afAuth.auth.signOut();
     window.location.reload();
@@ -118,7 +108,6 @@ export class AuthService {
 
 
   //// Helpers ////
-
   private updateUserData(): void {
   // Writes user name and email to realtime db
   // useful if your app displays information about users or for admin features

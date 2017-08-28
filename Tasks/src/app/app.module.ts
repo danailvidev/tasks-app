@@ -17,6 +17,7 @@ import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app.routes-module';
 import { CdkTableModule } from '@angular/cdk';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //Service
 import { AuthService } from './services/auth.service';
@@ -30,6 +31,9 @@ import { TaskListComponent } from './ui/task-list/task-list.component';
 import { RequirementsComponent } from './ui/requirements/requirements.component';
 import { UsersComponent } from './ui/users/users.component';
 import { HeaderComponent } from './ui/header/header.component';
+import { LoginFormComponent } from './ui/login-form/login-form.component';
+import { TaskDetailComponent } from './ui/task-detail/task-detail.component';
+import { DynamicFormComponent } from './ui/dynamic-form/dynamic-form.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { HeaderComponent } from './ui/header/header.component';
     TaskListComponent,
     RequirementsComponent,
     UsersComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginFormComponent,
+    TaskDetailComponent,
+    DynamicFormComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +56,7 @@ import { HeaderComponent } from './ui/header/header.component';
     MaterialModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     CdkTableModule
   ],
   providers: [

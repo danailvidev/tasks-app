@@ -1,0 +1,27 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+      <md-input-container class="example-full-width">
+          <input mdInput required placeholder="Name" type="name" id="name" [formControlName]="name" [id]="name">
+        </md-input-container>
+        <md-input-container class="example-full-width">
+            <input mdInput required placeholder="Date" type="text" id="date" [formControlName]="date" [id]="date">
+          </md-input-container>
+
+    <div *ngIf="status != 'waiting'">
+      <div *ngIf="operation === 'details'">
+        <button type="button" class="btn btn-raised btn-default" (click)="onBack()">Back</button>
+        <button type="button" class="btn btn-raised btn-primary" (click)="onEdit()">Edit</button>
+      </div>
+      <div *ngIf="operation === 'edit'">
+        <button type="button" class="btn btn-raised btn-default" (click)="onCancel()">Cancel</button>
+        <button type="button" class="btn btn-raised btn-primary" (click)="onSave()">Save</button>
+      </div>
+      <div *ngIf="operation === 'create'">
+        <button type="button" class="btn btn-raised btn-default" (click)="onBack()">Back</button>
+        <button type="button" class="btn btn-raised btn-primary" (click)="onCreate()">Create</button>
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -1,28 +1,18 @@
-<div *ngIf="!auth.currentUser; else alreadyLoggedIn">
-    
-      <h3>Social Login</h3>
-    
-    
-        <button (click)="signInWithGoogle()" class="button btn-social btn-google">
+<section>
+  <div *ngIf="!auth.currentUser; else alreadyLoggedIn">
+    <h3>Social Login</h3>
+    <button md-raised-button (click)="signInWithGoogle()" class="button btn-social btn-google">
           <i class="fa fa-google-plus fa-lg"></i> Connect Google
         </button>
-    
-        <button (click)="signInWithGithub()" class="button btn-social btn-github">
+    <button md-raised-button (click)="signInWithGithub()" class="button btn-social btn-github">
           <i class="fa fa-github fa-lg"></i> Connect GitHub
         </button>
-    
-        <hr>
-        
-    
-    
-        <!-- <user-form></user-form> -->
-    
-    </div>
-
-    
-    
-    <ng-template #alreadyLoggedIn>
-      <p class="text-success">
-        Already logged in!
-      </p>
-    </ng-template>
+    <hr>
+    <app-login-form></app-login-form>
+  </div>
+  <ng-template #alreadyLoggedIn>
+    <p class="text-success">
+      Already logged in!
+    </p>
+  </ng-template>
+</section>

@@ -2,21 +2,12 @@
   
 <section>
   <a md-raised-button routerLink=".">My Tasks</a>
-  <a md-raised-button color="primary" routerLink=".">Create New Task</a>
+  <a md-raised-button color="primary" (click)="createTask()">Create New Task</a>
 </section>
 
 <md-divider style="height:15px;"></md-divider>
 
 <section>
-  <!-- <form class="limits">
-    <md-select placeholder="Change Limits" [(ngModel)]="limits" name="limits" (onClose)="changeLimits()">
-      <md-option *ngFor="let limit of limits" [value]="limit.value" >
-        {{limit.viewValue}}
-      </md-option>
-    </md-select>
-  
-    <p> Selected Limit: {{limit}} </p>
-  </form> -->
   <md-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPaginateChange($event)">
   </md-paginator>
 
@@ -32,7 +23,7 @@
           <md-icon>more_vert</md-icon>
         </button>
       <md-menu #menu="mdMenu">
-        <button md-menu-item>
+        <button md-menu-item (click)="showTaskDetail(task.$key)">
           <md-icon>info</md-icon>
           <span>Details</span>
         </button>

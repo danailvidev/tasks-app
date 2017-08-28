@@ -1,0 +1,52 @@
+<form class="example-form" [formGroup]="userForm" *ngIf="newUser" (ngSubmit)="signup()">
+  <h3>New User Signup</h3>
+  <button md-raised-button (click)="toggleForm()">Already Registered?</button>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput required placeholder="Email" type="email" id="email" formControlName="email">
+          <div *ngIf="formErrors.email" class="help is-danger">
+            {{ formErrors.email }}
+          </div>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput placeholder="Password" type="password" id="password" formControlName="password" required>
+          <div *ngIf="formErrors.password" class="help is-danger">
+            {{ formErrors.password }}
+          </div>
+        </md-input-container>
+      </td>
+    </tr>
+    <button md-raised-button color="primary" type="submit" class="button" [disabled]="!userForm.valid">Register</button>
+  </table>
+</form>
+
+
+<form class="example-form" [formGroup]="userForm" *ngIf="!newUser" (ngSubmit)="login()">
+  <button md-raised-button (click)="toggleForm()">New User?</button>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput required placeholder="Email" type="email" id="email" formControlName="email">
+          <div *ngIf="formErrors.email" class="help is-danger">
+            {{ formErrors.email }}
+          </div>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput placeholder="Password" type="password" id="password" formControlName="password" required>
+          <div *ngIf="formErrors.password" class="help is-danger">
+            {{ formErrors.password }}
+          </div>
+        </md-input-container>
+      </td>
+    </tr>
+    <button md-raised-button color="primary" type="submit" class="button" [disabled]="!userForm.valid">Login</button>
+  </table>
+</form>

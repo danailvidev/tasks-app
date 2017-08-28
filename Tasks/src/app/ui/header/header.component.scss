@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     >button {
-      padding-right: 202px;
+      // padding-right: 202px;
       img {
         display: inline-block;
         max-width: 30px;
@@ -14,5 +14,8 @@
         border-radius: 20px;
       }
     }
+  }
+  .mat-icon-button {
+    width: unset!important;
   }
 }

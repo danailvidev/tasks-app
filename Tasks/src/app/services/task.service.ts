@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaskService {
-
+  private task: FirebaseObjectObservable<any>;
   constructor(public db: AngularFireDatabase) {}
 
   getTask(size): FirebaseListObservable<any[]> {
@@ -15,6 +15,14 @@ export class TaskService {
         limitToFirst: size
       }
     });
+  }
+
+  getTaskById(id: string) {
+    return this.task = this.db.object('/tasks/'+id);
+    // this.task.subscribe(item => {
+    //     this.task = item
+        
+    //   });
   }
 
   addTask(value: string): void {
