@@ -12,6 +12,7 @@ export class TaskService {
   getTask(size): FirebaseListObservable<any[]> {
     return this.db.list('/tasks', {
       query: {
+        orderByChild: 'createdOn',
         limitToFirst: size
       }
     });
@@ -25,10 +26,6 @@ export class TaskService {
     //   });
   }
 
-  addTask(value: string): void {
-    this.db.list('/tasks').push({ content: value, done: false });
-  }
-
   updateTask(task: any, newValue: string): void {
     this.db.object('/tasks/' + task.$key)
       .update({ content: newValue, done: task.done });    
@@ -39,5 +36,7 @@ export class TaskService {
     this.db.object('/tasks/'+ key).remove();
   }
 
-  
+  addTask(task){
+    this.db.list('/tasks').push(task);
+  }
 }

@@ -1,0 +1,40 @@
+<form class="example-form" [formGroup]="taskForm" *ngIf="userIsAuth" (ngSubmit)="onSubmit(taskForm)">
+  <h3>Task Create</h3>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput required placeholder="Title" type="text" id="title" formControlName="title">
+        </md-input-container>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput placeholder="Description" type="text" id="description" formControlName="description" required>
+        </md-input-container>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <md-select placeholder="Assignee" formControlName="assignee">
+          <md-option ngDefaultControl  *ngFor="let user of users | async" [value]="user.$key">
+            {{ user.email }}
+          </md-option>
+        </md-select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput placeholder="Comments" type="text" id="comments" formControlName="comments">
+        </md-input-container>
+      </td>
+    </tr>
+
+    <button md-raised-button color="primary" type="submit" class="button" [disabled]="!taskForm.valid">Save</button>
+  </table>
+</form>

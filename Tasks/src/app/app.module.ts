@@ -34,6 +34,7 @@ import { HeaderComponent } from './ui/header/header.component';
 import { LoginFormComponent } from './ui/login-form/login-form.component';
 import { TaskDetailComponent } from './ui/task-detail/task-detail.component';
 import { DynamicFormComponent } from './ui/dynamic-form/dynamic-form.component';
+import { TaskCreateComponent } from './ui/task-create/task-create.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +46,12 @@ import { DynamicFormComponent } from './ui/dynamic-form/dynamic-form.component';
     HeaderComponent,
     LoginFormComponent,
     TaskDetailComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    TaskCreateComponent
   ],
+  entryComponents: [
+    TaskCreateComponent
+],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),

@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   //@Output() user = new EventEmitter();
 
   constructor(public auth: AuthService,
-    private router: Router) { }
+              private router: Router) { }
 
   ngOnInit() {
   }

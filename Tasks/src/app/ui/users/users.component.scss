@@ -17,7 +17,7 @@
         margin: 15px;
         border: 1px solid transparent;
         &:hover {
-            border: 1px solid $accent-color;
+            background: $background-hover-color;
         }
       }
       

@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
 import { Task } from "../../view-models/task";
 import { TaskService } from "../../services/task.service";
 

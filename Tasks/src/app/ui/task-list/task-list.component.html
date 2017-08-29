@@ -2,7 +2,7 @@
   
 <section>
   <a md-raised-button routerLink=".">My Tasks</a>
-  <a md-raised-button color="primary" (click)="createTask()">Create New Task</a>
+  <a md-raised-button color="primary" (click)="openCreateTaskDialog()">Create New Task</a>
 </section>
 
 <md-divider style="height:15px;"></md-divider>
@@ -15,9 +15,12 @@
 
 <section class="mat-typography">
   <md-card *ngFor="let task of tasks">
-    <md-card-title><span>Name: </span>{{task.name}}</md-card-title>
-    <md-card-subtitle>
-      <md-icon>date_range</md-icon>{{task.date}}</md-card-subtitle>
+    <md-card-title><span>Title: </span>{{task.title}}</md-card-title>
+    <md-card-subtitle>Description: {{task.description}}</md-card-subtitle>
+    <p>Assigned to: {{task.assignee}}</p>
+    <p>Created on: {{task.createdOn * -1 }}</p>
+    <p>Creator: {{task.creatorId}}</p>
+    <p>Comments: {{task.comments}}</p>
     <div class="task-info">
       <button md-icon-button [mdMenuTriggerFor]="menu">
           <md-icon>more_vert</md-icon>
