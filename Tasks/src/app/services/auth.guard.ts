@@ -5,10 +5,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
+import {NotifyService} from './notify.service'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(private afAuth: AngularFireAuth,
+     private router: Router,
+    private notifySvc: NotifyService) {}
 
 
   canActivate(
@@ -20,7 +23,10 @@ export class AuthGuard implements CanActivate {
            .map(user => !!user)
            .do(loggedIn => {
              if (!loggedIn) {
-               console.log('access denied')
+               this.notifySvc.notify("access denied",null,{
+                duration: 2000,
+                extraClasses: ['snack-denied']
+              });
                this.router.navigate(['/login']);
              }
          })

@@ -1,7 +1,6 @@
-
-  
 <section>
-  <a md-raised-button routerLink=".">My Tasks</a>
+  <a md-raised-button *ngIf="!allTasksVisible" (click)="myTasks()">Show My Tasks</a>
+  <a md-raised-button *ngIf="allTasksVisible" (click)="allTasks()">Show All Tasks</a>
   <a md-raised-button color="primary" (click)="openCreateTaskDialog()">Create New Task</a>
 </section>
 
@@ -16,19 +15,30 @@
 <section class="mat-typography">
   <md-card *ngFor="let task of tasks">
     <md-card-title><span>Title: </span>{{task.title}}</md-card-title>
-    <md-card-subtitle>Description: {{task.description}}</md-card-subtitle>
-    <p>Assigned to: {{task.assignee}}</p>
-    <p>Created on: {{task.createdOn * -1 }}</p>
-    <p>Creator: {{task.creatorId}}</p>
-    <p>Comments: {{task.comments}}</p>
+    <md-card-subtitle><strong>Description:</strong> {{task.description}}</md-card-subtitle>
+    <p><strong>Assigned to</strong>: {{task.assignee}}</p>
+    <p><strong>Created on</strong>: {{ timeStampToDate(task.createdOn) | date:'medium' }}</p>
+    <p><strong>Creator</strong>: {{task.creatorId}}</p>
+    <p><strong>Comments</strong>:</p>
+    <ul *ngIf="task.comments">
+      <li *ngFor="let comment of task.comments | mapToIterable">
+        {{comment.comment}} by {{comment.author}} on {{timeStampToDate(comment.createdOn) | date:'medium' }}
+      </li>
+    </ul>
+    <md-input-container class="example-form">
+      <input mdInput #message maxlength="256" placeholder="Comment" type="text" id="comment">
+      <md-hint align="start"><strong>Don't disclose personal info</strong> </md-hint>
+      <md-hint align="end">{{message.value.length}} / 256</md-hint>
+    </md-input-container>
+    <button md-raised-button class="btn-comment" [disabled]="message.value.length < 1" (click)="addComment(message.value, task.$key)">Add Comment</button>
     <div class="task-info">
       <button md-icon-button [mdMenuTriggerFor]="menu">
           <md-icon>more_vert</md-icon>
         </button>
       <md-menu #menu="mdMenu">
         <button md-menu-item (click)="showTaskDetail(task.$key)">
-          <md-icon>info</md-icon>
-          <span>Details</span>
+          <md-icon>settings</md-icon>
+          <span>Edit</span>
         </button>
         <button md-menu-item (click)="btnDeleteClick(task.$key)">
           <md-icon>delete</md-icon>

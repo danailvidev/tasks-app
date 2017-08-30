@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { NotifyService } from '../../services/notify.service';
-import {  UserService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { Task } from '../../view-models/task';
 import { Router } from "@angular/router";
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { TaskCreateComponent } from '../task-create/task-create.component';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-task-list',
@@ -15,27 +16,27 @@ import { TaskCreateComponent } from '../task-create/task-create.component';
 })
 export class TaskListComponent implements OnInit {
   tasks: any;
+  allTasksVisible: boolean;
 
   constructor(private taskSvc: TaskService,
-              public notifySvc: NotifyService,
-              private router: Router,
-              private dialog: MdDialog,
-            private userSvc: UserService) {
+    public notifySvc: NotifyService,
+    private router: Router,
+    private dialog: MdDialog,
+    private userSvc: UserService,
+    private commentSvc: CommentService) {
   }
 
   ngOnInit() {
     this.taskSvc.getTask(null).subscribe((res) => {
       this.length = res.length;
       this.tasks = res;
-      //console.log(this.tasks);
+      console.log(this.tasks);
     });
 
-    this.userSvc.getUsers().map((item) => {
-      console.log("item", item);
-      return item;
-    }).subscribe((data) => {
-      console.log(data);
-    })
+    // this.taskSvc.getTaskTest().subscribe((res) => {
+    //   console.log(res)
+    // });
+
   }
 
   // MdPaginator Inputs
@@ -62,8 +63,8 @@ export class TaskListComponent implements OnInit {
   deleteTask(key) {
     this.taskSvc.deleteTask(key);
   }
-  
-  showTaskDetail (id: string) {
+
+  showTaskDetail(id: string) {
     this.router.navigate(['/task-detail', id, 'details']);
   }
 
@@ -77,8 +78,54 @@ export class TaskListComponent implements OnInit {
 
   openCreateTaskDialog() {
     let dialogRef = this.dialog.open(TaskCreateComponent);
-     dialogRef.afterClosed().subscribe(result => {
+  }
 
-     })
+  myTasks() {
+    // const userKey = Object.keys(window.localStorage)
+    //   .filter(it => it.startsWith('firebase:authUser'))[0];
+    // const user = userKey ? JSON.parse(localStorage.getItem(userKey)) : undefined;
+    // console.log(user.uid);
+    this.allTasksVisible = !this.allTasksVisible;
+
+
+
+
+    this.tasks = this.tasks.filter((task) => {
+      return task.assignee == this.getCurrentLoggedUserData().uid
+
+    });
+
+    //  this.userSvc.getUsers().subscribe((data) => {
+    //    data.forEach(user => {
+    //      console.log(user.$key);
+    //    });
+    //  })
+  }
+
+  getCurrentLoggedUserData() {
+    const userKey = Object.keys(window.localStorage)
+      .filter(it => it.startsWith('firebase:authUser'))[0];
+    const user = userKey ? JSON.parse(localStorage.getItem(userKey)) : undefined;
+    return user
+  }
+
+  timeStampToDate(int) {
+    int *= -1
+    return new Date(int).toString();
+  }
+
+  allTasks() {
+    this.tasks = this.getTask(null);
+    this.allTasksVisible = !this.allTasksVisible;
+  }
+  
+  addComment(comment, taskId) {
+    let commentObj = {
+      author: this.getCurrentLoggedUserData().uid,
+      createdOn: -1 * Number(new Date().getTime().toString()),
+      comment: comment
+    }
+
+    this.commentSvc.addComment(commentObj, taskId)
   }
 }

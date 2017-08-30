@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder,FormArray, Validators } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import {  UserService } from '../../services/user.service';
+import { NotifyService } from '../../services/notify.service';
 
 @Component({
   selector: 'app-task-create',
@@ -17,7 +18,8 @@ export class TaskCreateComponent implements OnInit {
   constructor(private dialogRef: MdDialogRef<TaskCreateComponent>,
     private fb: FormBuilder,
     private taskSvc: TaskService,
-  private userSvc: UserService) { }
+  private userSvc: UserService,
+private notifySvc: NotifyService) { }
 
   ngOnInit() {
     this.userIsAuth = this.isUserAuth();
@@ -36,20 +38,26 @@ export class TaskCreateComponent implements OnInit {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      assignee: ['', ''],
-      comments: ['', ''],
+      assignee: [],
     });
   }
+  
 
   onSubmit() {
     const userKey = Object.keys(window.localStorage)
       .filter(it => it.startsWith('firebase:authUser'))[0];
     const currentUser = userKey ? JSON.parse(localStorage.getItem(userKey)) : undefined;
 
+    console.log(currentUser.uid);
+
     this.taskForm.value.creatorId = currentUser.uid;
     //reverse number for order by desc
     this.taskForm.value.createdOn = -1 * Number(new Date().getTime().toString());
     this.taskSvc.addTask(this.taskForm.value);
     this.dialogRef.close();
+    this.notifySvc.notify("task created", null, {
+      duration: 3000,
+      extraClasses: ['snack-success']
+    })
   }
 }

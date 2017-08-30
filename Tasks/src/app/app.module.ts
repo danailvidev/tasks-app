@@ -23,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { TaskService } from './services/task.service';
 import { NotifyService } from './services/notify.service';
-import {  UserService } from './services/user.service';
+import { UserService } from './services/user.service';
+import { CommentService } from './services/comment.service';
 
 // Components
 import { LoginComponent } from './ui/login/login.component';
@@ -36,6 +37,9 @@ import { TaskDetailComponent } from './ui/task-detail/task-detail.component';
 import { DynamicFormComponent } from './ui/dynamic-form/dynamic-form.component';
 import { TaskCreateComponent } from './ui/task-create/task-create.component';
 
+// Pipes
+import {MapToIterable} from './pipes/mapToIterable'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,11 +51,12 @@ import { TaskCreateComponent } from './ui/task-create/task-create.component';
     LoginFormComponent,
     TaskDetailComponent,
     DynamicFormComponent,
-    TaskCreateComponent
+    TaskCreateComponent,
+    MapToIterable
   ],
   entryComponents: [
     TaskCreateComponent
-],
+  ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -68,8 +73,9 @@ import { TaskCreateComponent } from './ui/task-create/task-create.component';
     AuthService,
     TaskService,
     NotifyService,
-    UserService
+    UserService,
+    CommentService
   ],
-  bootstrap: [AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

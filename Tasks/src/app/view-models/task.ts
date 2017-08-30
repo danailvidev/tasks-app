@@ -4,5 +4,5 @@ export class Task {
     createdOn: Number
     creator: string
     AssigneeId: string
-    comments: Array<string>
+    comments: Comment[]
 }
