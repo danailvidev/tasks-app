@@ -17,6 +17,7 @@ import { CommentService } from '../../services/comment.service';
 export class TaskListComponent implements OnInit {
   tasks: any;
   allTasksVisible: boolean;
+users: any;
 
   constructor(private taskSvc: TaskService,
     public notifySvc: NotifyService,
@@ -27,16 +28,12 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.taskSvc.getTask(null).subscribe((res) => {
-      this.length = res.length;
-      this.tasks = res;
-      console.log(this.tasks);
-    });
-
-    // this.taskSvc.getTaskTest().subscribe((res) => {
-    //   console.log(res)
-    // });
-
+    
+    this.taskSvc.getTask(null)
+    .subscribe((res) => {
+      this.length = res.length
+      this.tasks = res
+    })
   }
 
   // MdPaginator Inputs
@@ -60,8 +57,8 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  deleteTask(key) {
-    this.taskSvc.deleteTask(key);
+  deleteTask(taskKey) {
+    this.taskSvc.deleteTask(taskKey);
   }
 
   showTaskDetail(id: string) {
@@ -80,26 +77,16 @@ export class TaskListComponent implements OnInit {
     let dialogRef = this.dialog.open(TaskCreateComponent);
   }
 
-  myTasks() {
-    // const userKey = Object.keys(window.localStorage)
-    //   .filter(it => it.startsWith('firebase:authUser'))[0];
-    // const user = userKey ? JSON.parse(localStorage.getItem(userKey)) : undefined;
-    // console.log(user.uid);
+  showAllTasks() {
+    this.tasks = this.getTask(null);
     this.allTasksVisible = !this.allTasksVisible;
+  }
 
-
-
-
+  showMyTasks() {
+    this.allTasksVisible = !this.allTasksVisible;
     this.tasks = this.tasks.filter((task) => {
-      return task.assignee == this.getCurrentLoggedUserData().uid
-
+      return task.assignee == this.getCurrentLoggedUserData().email
     });
-
-    //  this.userSvc.getUsers().subscribe((data) => {
-    //    data.forEach(user => {
-    //      console.log(user.$key);
-    //    });
-    //  })
   }
 
   getCurrentLoggedUserData() {
@@ -114,18 +101,29 @@ export class TaskListComponent implements OnInit {
     return new Date(int).toString();
   }
 
-  allTasks() {
-    this.tasks = this.getTask(null);
-    this.allTasksVisible = !this.allTasksVisible;
-  }
-  
   addComment(comment, taskId) {
     let commentObj = {
       author: this.getCurrentLoggedUserData().uid,
+      authorEmail: this.getCurrentLoggedUserData().email,
       createdOn: -1 * Number(new Date().getTime().toString()),
       comment: comment
     }
 
     this.commentSvc.addComment(commentObj, taskId)
+  }
+  goToUserDetail(email) {
+    var id;
+    this.users = this.userSvc.getUsers().subscribe((res) =>{
+      this.users = res;
+      this.users.forEach(element => {
+        console.log(element)
+        if (element.email == email){
+          id = element.$key
+        }
+      });
+      
+      this.router.navigate(['/user-detail', id, 'details']);
+    })
+    
   }
 }

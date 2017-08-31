@@ -1,6 +1,6 @@
 <section>
-  <a md-raised-button *ngIf="!allTasksVisible" (click)="myTasks()">Show My Tasks</a>
-  <a md-raised-button *ngIf="allTasksVisible" (click)="allTasks()">Show All Tasks</a>
+  <a md-raised-button *ngIf="!allTasksVisible" (click)="showMyTasks()">Show My Tasks</a>
+  <a md-raised-button *ngIf="allTasksVisible" (click)="showAllTasks()">Show All Tasks</a>
   <a md-raised-button color="primary" (click)="openCreateTaskDialog()">Create New Task</a>
 </section>
 
@@ -16,13 +16,13 @@
   <md-card *ngFor="let task of tasks">
     <md-card-title><span>Title: </span>{{task.title}}</md-card-title>
     <md-card-subtitle><strong>Description:</strong> {{task.description}}</md-card-subtitle>
-    <p><strong>Assigned to</strong>: {{task.assignee}}</p>
+    <p><strong>Assigned to</strong>: <a (click)="goToUserDetail(task.assignee)">{{task.assignee}}</a></p>
     <p><strong>Created on</strong>: {{ timeStampToDate(task.createdOn) | date:'medium' }}</p>
-    <p><strong>Creator</strong>: {{task.creatorId}}</p>
+    <p><strong>Creator</strong>: <a (click)="goToUserDetail(task.creatorEmail)">{{task.creatorEmail}}</a></p>
     <p><strong>Comments</strong>:</p>
     <ul *ngIf="task.comments">
       <li *ngFor="let comment of task.comments | mapToIterable">
-        {{comment.comment}} by {{comment.author}} on {{timeStampToDate(comment.createdOn) | date:'medium' }}
+        {{comment.comment}} by <a (click)="goToUserDetail(comment.authorEmail)">{{comment.authorEmail }}</a> on {{timeStampToDate(comment.createdOn) | date:'medium' }}
       </li>
     </ul>
     <md-input-container class="example-form">

@@ -20,7 +20,7 @@
     <tr>
       <td>
         <md-select placeholder="Assignee" formControlName="assignee">
-          <md-option ngDefaultControl  *ngFor="let user of users | async" [value]="user.$key">
+          <md-option ngDefaultControl  *ngFor="let user of users | async" [value]="user.email">
             {{ user.email }}
           </md-option>
         </md-select>

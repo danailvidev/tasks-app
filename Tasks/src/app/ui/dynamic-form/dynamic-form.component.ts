@@ -9,7 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./dynamic-form.component.scss']
 })
 export class DynamicFormComponent implements OnInit {
-  @Input() vm: any;
+  @Input() vm: any; 
+  @Input() task: any;
   @Input() operation: string;
   @Output() update: EventEmitter<any> = new EventEmitter();
   @Output() create: EventEmitter<any> = new EventEmitter();

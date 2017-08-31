@@ -1,0 +1,11 @@
+section {
+    padding: 15px;
+    div {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+    }
+    button {
+        margin: 20px 0;
+    }
+}

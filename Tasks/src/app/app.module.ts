@@ -36,9 +36,10 @@ import { LoginFormComponent } from './ui/login-form/login-form.component';
 import { TaskDetailComponent } from './ui/task-detail/task-detail.component';
 import { DynamicFormComponent } from './ui/dynamic-form/dynamic-form.component';
 import { TaskCreateComponent } from './ui/task-create/task-create.component';
+import { UserDetailComponent } from './ui/user-detail-component/user-detail.component';
 
 // Pipes
-import {MapToIterable} from './pipes/mapToIterable'
+import { MapToIterable } from './pipes/mapToIterable';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {MapToIterable} from './pipes/mapToIterable'
     TaskDetailComponent,
     DynamicFormComponent,
     TaskCreateComponent,
-    MapToIterable
+    MapToIterable,
+    UserDetailComponent,
   ],
   entryComponents: [
     TaskCreateComponent

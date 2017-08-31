@@ -1,8 +1,22 @@
-<h3>Task Detail</h3>
+<section>
 
-<app-dynamic-form 
-[vm]="task"
-[operation]="operation"
-(update)="updateTask($event)"
-(create)="createTask($event)">
-</app-dynamic-form>
+  <h3>Task Detail</h3>
+  <md-divider></md-divider>
+  <div>
+    <md-input-container class="example-full-width">
+      <input mdInput placeholder="Title" type="text" #title name="title" id="title" value={{task?.title}}>
+    </md-input-container>
+
+    <md-input-container class="example-full-width">
+      <input mdInput placeholder="Description" type="text" #description value={{task?.description}}>
+    </md-input-container>
+
+    <md-select placeholder="Assignee" #assignee [(ngModel)]="selectedEmail">
+      <md-option *ngFor="let user of users | async"  [value]="user?.email">
+        {{ user?.email }}
+      </md-option>
+    </md-select>
+  </div>
+
+  <button md-raised-button color="primary" (click)="save(title.value,description.value,assignee.selected.value)">Save</button>
+</section>

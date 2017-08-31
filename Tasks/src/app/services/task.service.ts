@@ -19,31 +19,16 @@ export class TaskService {
   }
 
   getTaskById(id: string) {
-    return this.task = this.db.object('/tasks/' + id);
-    // this.task.subscribe(item => {
-    //     this.task = item
-        
-    //   });
+    return  this.db.object(`/tasks/${id}`);
   }
 
-  // getTaskTest() {
-  //   return this.db.list('/tasks').map( (items) => {
-  //     return items.map( item => {
-  //         item.comments = this.db.object(`/comments/${item.comment}`)
-  //         return item
-  //     })
-  // })
-  
-  // }
-
-  updateTask(id, newValue: string): void {
-    this.db.object('/tasks/' + id)
-      .update({ content: newValue });    
+  updateTask(id, newValue): void {
+    this.db.object(`/tasks/${id}`)
+      .update(newValue);    
   }
 
   deleteTask(id: string){
-    console.log(id);
-    this.db.object('/tasks/' + id).remove();
+    this.db.object(`/tasks/${id}`).remove();
   }
 
   addTask(task){

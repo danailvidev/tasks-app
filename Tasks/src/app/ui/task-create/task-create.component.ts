@@ -48,9 +48,10 @@ private notifySvc: NotifyService) { }
       .filter(it => it.startsWith('firebase:authUser'))[0];
     const currentUser = userKey ? JSON.parse(localStorage.getItem(userKey)) : undefined;
 
-    console.log(currentUser.uid);
+    console.log(currentUser);
 
     this.taskForm.value.creatorId = currentUser.uid;
+    this.taskForm.value.creatorEmail = currentUser.email;
     //reverse number for order by desc
     this.taskForm.value.createdOn = -1 * Number(new Date().getTime().toString());
     this.taskSvc.addTask(this.taskForm.value);

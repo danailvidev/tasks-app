@@ -1,34 +1,47 @@
 @import '~@angular/material/prebuilt-themes/purple-green.css';
 @import "./app/config/sass/config";
-
+a {
+  color: #5778a2;
+  cursor: pointer;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: #303030;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 snack-bar-container.snack-delete {
-    
-    .mat-simple-snackbar-action {
-        color: $warn-color!important;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+  .mat-simple-snackbar-action {
+    color: $warn-color!important;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
+
 snack-bar-container.snack-denied {
-    
-    .mat-simple-snackbar {
-        text-align: center;
-        display: block;
-        color: $warn-color!important;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+  .mat-simple-snackbar {
+    text-align: center;
+    display: block;
+    color: $warn-color!important;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
+
 snack-bar-container.snack-success {
-    
-    .mat-simple-snackbar {
-        text-align: center;
-        display: block;
-        color: $accent-color!important;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+  .mat-simple-snackbar {
+    text-align: center;
+    display: block;
+    color: $accent-color!important;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
-
-
-
