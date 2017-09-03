@@ -11,7 +11,6 @@ export class UserService {
 
   getUsers(): FirebaseListObservable<any[]> {
     return this.db.list('/users');
-    
   }
 
   getUserById(id) {

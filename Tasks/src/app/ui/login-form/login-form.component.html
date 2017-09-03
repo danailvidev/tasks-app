@@ -21,6 +21,18 @@
         </md-input-container>
       </td>
     </tr>
+    <tr>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput placeholder="First Name" type="text" id="firstName" formControlName="firstName" required>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput placeholder="Last Name" type="text" id="lastName" formControlName="lastName" required>
+        </md-input-container>
+      </td>
+    </tr>
     <button md-raised-button color="primary" type="submit" class="button" [disabled]="!userForm.valid">Register</button>
   </table>
 </form>

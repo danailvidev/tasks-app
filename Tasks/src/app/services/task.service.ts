@@ -24,14 +24,14 @@ export class TaskService {
 
   updateTask(id, newValue): void {
     this.db.object(`/tasks/${id}`)
-      .update(newValue);    
+      .update(newValue);
   }
 
-  deleteTask(id: string){
+  deleteTask(id: string) {
     this.db.object(`/tasks/${id}`).remove();
   }
 
-  addTask(task){
+  addTask(task) {
     this.db.list('/tasks').push(task);
   }
 }

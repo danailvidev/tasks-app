@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../services/auth.service";
+import { AuthService } from '../../services/auth.service';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,23 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 export class LoginFormComponent implements OnInit {
   userForm: FormGroup;
   newUser = true; // to toggle login or signup form
+  formErrors = {
+    'email': '',
+    'password': ''
+  };
+
+  validationMessages = {
+    'email': {
+      'required': 'Email is required.',
+      'email': 'Email must be a valid email'
+    },
+    'password': {
+      'required': 'Password is required.',
+      'pattern': 'Password must be include at one letter and one number.',
+      'minlength': 'Password must be at least 4 characters long.',
+      'maxlength': 'Password cannot be more than 40 characters long.',
+    }
+  };
 
   constructor(private fb: FormBuilder, private auth: AuthService) { }
 
@@ -22,26 +39,31 @@ export class LoginFormComponent implements OnInit {
   }
 
   signup(): void {
-    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
+    this.auth.emailSignUp(this.userForm.value['email'],
+                          this.userForm.value['password'],
+                          this.userForm.value['firstName'],
+                          this.userForm.value['lastName']);
   }
 
   login(): void {
-    this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
+    this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password']);
   }
 
   buildForm(): void {
     this.userForm = this.fb.group({
       'email': ['', [
-          Validators.required,
-          Validators.email
-        ]
+        Validators.required,
+        Validators.email
+      ]
       ],
       'password': ['', [
         Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
         Validators.minLength(6),
         Validators.maxLength(25)
       ]
-    ],
+      ],
+      'firstName': ['', Validators.required],
+      'lastName': ['', Validators.required]
     });
 
     this.userForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -58,30 +80,11 @@ export class LoginFormComponent implements OnInit {
       const control = form.get(field);
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
+        // tslint:disable-next-line:forin
         for (const key in control.errors) {
           this.formErrors[field] += messages[key] + ' ';
         }
       }
     }
   }
-
- formErrors = {
-    'email': '',
-    'password': ''
-  };
-
-  validationMessages = {
-    'email': {
-      'required':      'Email is required.',
-      'email':         'Email must be a valid email'
-    },
-    'password': {
-      'required':      'Password is required.',
-      'pattern':       'Password must be include at one letter and one number.',
-      'minlength':     'Password must be at least 4 characters long.',
-      'maxlength':     'Password cannot be more than 40 characters long.',
-    }
-  };
-
-
 }

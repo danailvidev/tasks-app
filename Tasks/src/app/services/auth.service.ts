@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 
 
@@ -14,7 +14,7 @@ export class AuthService {
               private router: Router) {
     this.authState = this.afAuth.authState;
     this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth
+      this.authState = auth;
     });
   }
 
@@ -30,7 +30,7 @@ export class AuthService {
 
   // Returns
   get currentUserObservable(): any {
-    return this.afAuth.authState
+    return this.afAuth.authState;
   }
 
   // Returns current user UID
@@ -40,30 +40,28 @@ export class AuthService {
 
   // Anonymous User
   get currentUserAnonymous(): boolean {
-    return this.authenticated ? this.authState.isAnonymous : false
+    return this.authenticated ? this.authState.isAnonymous : false;
   }
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
     if (!this.authState) {
-      return 'Guest'
-    }
-    else if (this.currentUserAnonymous) {
-      return 'Anonymous'
-    }
-    else {
-      return this.authState['displayName'] || 'User without a Name'
+      return 'Guest';
+    } else if (this.currentUserAnonymous) {
+      return 'Anonymous';
+    } else {
+      return this.authState['displayName'] || 'User without a Name';
     }
   }
 
   //// Social Auth ////
   githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider()
+    const provider = new firebase.auth.GithubAuthProvider();
     return this.socialSignIn(provider);
   }
 
   googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GoogleAuthProvider();
     return this.socialSignIn(provider);
   }
 
@@ -79,10 +77,13 @@ export class AuthService {
 
 
   //// Email/Password Auth ////
-  emailSignUp(email: string, password: string) {
+  emailSignUp(email: string, password: string, firstName: string = null, lastName: string = null) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
+        if (user.displayName == null) {
+          this.authState.name = `${firstName} ${lastName}`;
+        }
         this.updateUserData();
         window.location.reload();
       })
@@ -103,7 +104,7 @@ export class AuthService {
   signOut(): void {
     this.afAuth.auth.signOut();
     window.location.reload();
-    //this.router.navigate(['/'])
+    // this.router.navigate(['/'])
   }
 
 
@@ -115,12 +116,11 @@ export class AuthService {
     const path = `users/${this.currentUserId}`; // Endpoint on firebase
     const data = {
       email: this.authState.email,
-      name: this.authState.displayName
-    }
+      name: this.authState.displayName == null ? this.authState.name : this.authState.displayName
+    };
 
     this.db.object(path).update(data)
       .catch(error => console.log(error));
 
   }
-
 }
