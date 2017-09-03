@@ -2,15 +2,15 @@
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
     <md-card-title>Name: {{user?.name}}</md-card-title>
-        <md-card-subtitle>Email: <a routerLink=".">{{user?.email}}</a></md-card-subtitle>
-      </md-card-header>
-      <md-card-content>
-        <p>
-          User info
-        </p>
-      </md-card-content>
-      <md-card-actions>
-        <button md-raised-button mdTooltip="Detail View" mdTooltipPosition="above" md-button>DETAILS</button>
-        <button md-raised-button (click)="view(user)" mdTooltip="Edit User" mdTooltipPosition="above" md-button>EDIT</button>
-      </md-card-actions>
-    </md-card>
+    <md-card-subtitle>Email: <a (click)="goToUserDetail(user.$key)">{{user?.email}}</a></md-card-subtitle>
+    <md-card-subtitle>Registered On: {{user?.registeredOn | date:'medium'}}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <!-- <p>
+      User info:
+    </p> -->
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button mdTooltip="Detail View" mdTooltipPosition="above" md-button (click)="goToUserDetail(user.$key)">DETAILS</button>
+  </md-card-actions>
+</md-card>

@@ -19,7 +19,7 @@ import { AppRoutingModule } from './app.routes-module';
 import { CdkTableModule } from '@angular/cdk';
 import { ReactiveFormsModule } from '@angular/forms';
 
-//Service
+// Service
 import { AuthService } from './services/auth.service';
 import { TaskService } from './services/task.service';
 import { NotifyService } from './services/notify.service';
@@ -36,7 +36,7 @@ import { LoginFormComponent } from './ui/login-form/login-form.component';
 import { TaskDetailComponent } from './ui/task-detail/task-detail.component';
 import { DynamicFormComponent } from './ui/dynamic-form/dynamic-form.component';
 import { TaskCreateComponent } from './ui/task-create/task-create.component';
-import { UserDetailComponent } from './ui/user-detail-component/user-detail.component';
+import { UserDetailComponent } from './ui/user-detail/user-detail.component';
 
 // Pipes
 import { MapToIterable } from './pipes/mapToIterable';

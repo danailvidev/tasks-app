@@ -3,6 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { NotifyService } from './notify.service';
 
 
 @Injectable()
@@ -10,8 +11,9 @@ export class AuthService {
   authState: any = null;
 
   constructor(private afAuth: AngularFireAuth,
-              private db: AngularFireDatabase,
-              private router: Router) {
+    private db: AngularFireDatabase,
+    private router: Router,
+    private notifySvc: NotifyService) {
     this.authState = this.afAuth.authState;
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
@@ -75,7 +77,6 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
-
   //// Email/Password Auth ////
   emailSignUp(email: string, password: string, firstName: string = null, lastName: string = null) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -87,7 +88,13 @@ export class AuthService {
         this.updateUserData();
         window.location.reload();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.notifySvc.notify(error.toString(), null, {
+          duration: 4000,
+          extraClasses: ['snack-denied']
+        });
+        console.log(error);
+      });
   }
 
   emailLogin(email: string, password: string) {
@@ -97,7 +104,13 @@ export class AuthService {
         this.updateUserData();
         window.location.reload();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.notifySvc.notify(error.toString(), null, {
+          duration: 4000,
+          extraClasses: ['snack-denied']
+        });
+        console.log(error);
+      });
   }
 
   //// Sign Out ////
@@ -107,7 +120,6 @@ export class AuthService {
     // this.router.navigate(['/'])
   }
 
-
   //// Helpers ////
   private updateUserData(): void {
     // Writes user name and email to realtime db
@@ -116,11 +128,18 @@ export class AuthService {
     const path = `users/${this.currentUserId}`; // Endpoint on firebase
     const data = {
       email: this.authState.email,
-      name: this.authState.displayName == null ? this.authState.name : this.authState.displayName
+      name: this.authState.displayName == null ? this.authState.name : this.authState.displayName,
+      registeredOn: new Date().getTime().toString()
     };
 
     this.db.object(path).update(data)
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.notifySvc.notify(error.toString(), null, {
+          duration: 4000,
+          extraClasses: ['snack-denied']
+        });
+        console.log(error);
+      });
 
   }
 }

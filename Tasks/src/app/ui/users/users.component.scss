@@ -22,8 +22,7 @@
       }
       
       .example-header-image {
-        background-image: url('');
+        background-image: url($imgUrl + 'user.svg');
         background-size: cover;
-        border: 1px solid white;
       }
 }

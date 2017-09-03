@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TaskService } from "../../services/task.service";
-import { UserService } from "../../services/user.service";
-import { NotifyService } from "../../services/notify.service";
+import { TaskService } from '../../services/task.service';
+import { UserService } from '../../services/user.service';
+import { NotifyService } from '../../services/notify.service';
 
 @Component({
   selector: 'app-task-detail',
@@ -31,22 +31,22 @@ export class TaskDetailComponent implements OnInit {
       this.task = res;
       this.selectedEmail = this.task.assignee;
 
-      console.log(this.task);
-    })
+      // console.log(this.task);
+    });
 
     this.users = this.userSvc.getUsers();
   }
 
   save(title, description, assignee) {
-    this.task.title = title
-    this.task.description = description
-    this.task.assignee = assignee
+    this.task.title = title;
+    this.task.description = description;
+    this.task.assignee = assignee;
     console.log(this.task);
     this.taskSvc.updateTask(this.task.$key, this.task);
-    this.notifySvc.notify("Task Updated", null, {
+    this.notifySvc.notify('Task Updated', null, {
       duration: 3000,
       extraClasses: ['snack-success']
-    })
+    });
   }
 
 }

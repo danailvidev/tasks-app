@@ -18,6 +18,12 @@ body {
     justify-content: center;
     align-items: center;
 }
+snack-bar-container {
+  background: #8A8A8A!important;
+  .mat-simple-snackbar {
+    color: #000!important;
+  }
+}
 snack-bar-container.snack-delete {
   .mat-simple-snackbar-action {
     color: $warn-color!important;

@@ -4,7 +4,7 @@ import { NotifyService } from '../../services/notify.service';
 import { UserService } from '../../services/user.service';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { Task } from '../../view-models/task';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { TaskCreateComponent } from '../task-create/task-create.component';
 import { CommentService } from '../../services/comment.service';
@@ -28,12 +28,11 @@ users: any;
   }
 
   ngOnInit() {
-    
     this.taskSvc.getTask(null)
     .subscribe((res) => {
-      this.length = res.length
-      this.tasks = res
-    })
+      this.length = res.length;
+      this.tasks = res;
+    });
   }
 
   // MdPaginator Inputs
@@ -66,7 +65,7 @@ users: any;
   }
 
   btnDeleteClick(taskKey) {
-    let notifyConfig = this.notifySvc.notify('Are you sure?', 'Delete', {
+    const notifyConfig = this.notifySvc.notify('Are you sure?', 'Delete', {
       duration: 7000,
       extraClasses: ['snack-delete']
     });
@@ -74,7 +73,7 @@ users: any;
   }
 
   openCreateTaskDialog() {
-    let dialogRef = this.dialog.open(TaskCreateComponent);
+    const dialogRef = this.dialog.open(TaskCreateComponent);
   }
 
   showAllTasks() {
@@ -85,7 +84,7 @@ users: any;
   showMyTasks() {
     this.allTasksVisible = !this.allTasksVisible;
     this.tasks = this.tasks.filter((task) => {
-      return task.assignee == this.getCurrentLoggedUserData().email
+      return task.assignee === this.getCurrentLoggedUserData().email;
     });
   }
 
@@ -93,37 +92,37 @@ users: any;
     const userKey = Object.keys(window.localStorage)
       .filter(it => it.startsWith('firebase:authUser'))[0];
     const user = userKey ? JSON.parse(localStorage.getItem(userKey)) : undefined;
-    return user
+    return user;
   }
 
   timeStampToDate(int) {
-    int *= -1
+    int *= -1;
     return new Date(int).toString();
   }
 
   addComment(comment, taskId) {
-    let commentObj = {
+    const commentObj = {
       author: this.getCurrentLoggedUserData().uid,
       authorEmail: this.getCurrentLoggedUserData().email,
       createdOn: -1 * Number(new Date().getTime().toString()),
       comment: comment
-    }
+    };
 
-    this.commentSvc.addComment(commentObj, taskId)
+    this.commentSvc.addComment(commentObj, taskId);
   }
   goToUserDetail(email) {
-    var id;
-    this.users = this.userSvc.getUsers().subscribe((res) =>{
+    let id;
+    this.users = this.userSvc.getUsers().subscribe((res) => {
       this.users = res;
       this.users.forEach(element => {
-        console.log(element)
-        if (element.email == email){
-          id = element.$key
+        // console.log(element)
+        if (element.email === email) {
+          id = element.$key;
         }
       });
-      
-      this.router.navigate(['/user-detail', id, 'details']);
-    })
-    
+
+      this.router.navigate(['/user-detail', id]);
+    });
+
   }
 }

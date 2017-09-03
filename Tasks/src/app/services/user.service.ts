@@ -16,4 +16,9 @@ export class UserService {
   getUserById(id) {
     return  this.db.object(`/users/${id}`);
   }
+
+  updateUser(id, newValue): void {
+    this.db.object(`/users/${id}`)
+      .update(newValue);
+  }
 }

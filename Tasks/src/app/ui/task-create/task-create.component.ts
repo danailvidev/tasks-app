@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
-import { ReactiveFormsModule, FormGroup, FormBuilder,FormArray, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import {  UserService } from '../../services/user.service';
 import { NotifyService } from '../../services/notify.service';
@@ -23,9 +23,7 @@ private notifySvc: NotifyService) { }
 
   ngOnInit() {
     this.userIsAuth = this.isUserAuth();
-    
     this.users = this.userSvc.getUsers();
-    console.log(this.users)
     this.buildForm();
   }
 
@@ -41,7 +39,6 @@ private notifySvc: NotifyService) { }
       assignee: [],
     });
   }
-  
 
   onSubmit() {
     const userKey = Object.keys(window.localStorage)
@@ -52,13 +49,13 @@ private notifySvc: NotifyService) { }
 
     this.taskForm.value.creatorId = currentUser.uid;
     this.taskForm.value.creatorEmail = currentUser.email;
-    //reverse number for order by desc
+    // reverse number for order by desc
     this.taskForm.value.createdOn = -1 * Number(new Date().getTime().toString());
     this.taskSvc.addTask(this.taskForm.value);
     this.dialogRef.close();
-    this.notifySvc.notify("task created", null, {
+    this.notifySvc.notify('task created', null, {
       duration: 3000,
       extraClasses: ['snack-success']
-    })
+    });
   }
 }

@@ -1,0 +1,23 @@
+<section>
+  <md-card class="example-card">
+    <md-card-header>
+
+      <md-card-title *ngIf="!showInput"><strong>Name: </strong>{{user?.name}}</md-card-title>
+      <md-card-title>
+        <md-input-container *ngIf="showInput" class="full-width">
+          <input (keyup)="onKey($event)" mdInput placeholder="Name" type="text" name="name" id="name" value={{user?.name}}>
+        </md-input-container>
+      </md-card-title>
+
+      <md-card-subtitle><strong>Email: </strong>{{user?.email}}</md-card-subtitle>
+      <md-card-subtitle><strong>registered Date: </strong>{{user?.registeredOn | date:'medium'}}</md-card-subtitle>
+
+    </md-card-header>
+    <md-card-actions>
+      <button *ngIf="!showInput" md-button md-raised [disabled]="isAbleToEdit(user?.$key)" (click)="toggleShowInput()">EDIT</button>
+      <button *ngIf="showInput" md-button md-raised [disabled]="isAbleToEdit(user?.$key)" (click)="saveUserData(user.$key)">SAVE</button>
+    </md-card-actions>
+  </md-card>
+  <br><br>
+  <button md-raised-button md-button color="primary" (click)="onBack()">BACK</button>
+</section>
