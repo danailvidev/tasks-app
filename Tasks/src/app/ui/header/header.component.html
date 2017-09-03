@@ -6,13 +6,15 @@
     <a class="docs-button mat-button" routerLink="/tasks" routerLinkActive="active-link" aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Tasks</span>
         <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
       </a>
-    <a *ngIf="!user" class="docs-button mat-button" routerLink="/login" aria-disabled="false" routerLinkActive="active-link"tabindex="0"><span class="mat-button-wrapper">Login</span>
+
+    <a class="docs-button mat-button" routerLink="/users" routerLinkActive="active-link" aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Users</span>
         <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
       </a>
-      <a class="docs-button mat-button"  routerLink="/users" routerLinkActive="active-link" aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Users</span>
+    <a class="docs-button mat-button" routerLink="/requirements" routerLinkActive="active-link" aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Requirements</span>
         <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
       </a>
-      <a class="docs-button mat-button" routerLink="/requirements" routerLinkActive="active-link"aria-disabled="false" tabindex="0"><span class="mat-button-wrapper">Requirements</span>
+    <a *ngIf="!user" class="docs-button mat-button" routerLink="/login" aria-disabled="false" routerLinkActive="active-link"
+      tabindex="0"><span class="mat-button-wrapper">Login</span>
         <div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div>
       </a>
   </div>
