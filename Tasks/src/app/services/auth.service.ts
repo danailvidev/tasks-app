@@ -72,9 +72,16 @@ export class AuthService {
       .then((credential) => {
         this.authState = credential.user;
         this.updateUserData();
+        this.router.navigate(['/']);
         window.location.reload();
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.notifySvc.notify(error.toString(), null, {
+          duration: 4000,
+          extraClasses: ['snack-denied']
+        });
+        console.log(error);
+      });
   }
 
   //// Email/Password Auth ////
@@ -86,6 +93,7 @@ export class AuthService {
           this.authState.name = `${firstName} ${lastName}`;
         }
         this.updateUserData();
+        this.router.navigate(['/']);
         window.location.reload();
       })
       .catch(error => {
@@ -101,7 +109,8 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
-        this.updateUserData();
+        // this.updateUserData();
+        this.router.navigate(['/']);
         window.location.reload();
       })
       .catch(error => {
@@ -116,8 +125,8 @@ export class AuthService {
   //// Sign Out ////
   signOut(): void {
     this.afAuth.auth.signOut();
+    this.router.navigate(['/']);
     window.location.reload();
-    // this.router.navigate(['/'])
   }
 
   //// Helpers ////

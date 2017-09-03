@@ -22,7 +22,7 @@ export class CommentService {
     return this.comment = this.db.object('/tasks/comments/' + id);
   }
 
-  addComment(comment, taskId){
+  addComment(comment, taskId) {
     this.db.list('/tasks/' + taskId + '/comments').push(comment);
   }
 }
